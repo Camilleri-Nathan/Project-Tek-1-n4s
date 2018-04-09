@@ -5,29 +5,42 @@
 ## Makefile
 ##
 
-CC	=	gcc
+CC		=	gcc
 
-RM	=	rm -f
+RM		=	rm -f
 
-DIR_SRC	=	src
+OBJS		=	$(addprefix $(SRCDIR), $(SRCS:.c=.o))
 
-SRC	=	$(DIR_SRC)/main.c		\
+SRCDIR		=	src/
 
-OBJ	=	$(SRC:.c=.o)
+MAKE		=	make -C
 
-NAME	=	ai
+CFLAGS		=	-W -Wall -Wextra
+CFLAGS		+=	-I./include/
 
-CFLAGS	=	-I./include
+NAME		=	ai
 
-$(NAME):	$(OBJ)
-		$(CC) -o $(NAME) $(OBJ)
+SRCS		=	main.c
 
-all:		$(NAME)
+DEBUG		=	no
+
+ifeq ($(DEBUG),yes)
+CFLAGS		+= -g
+else
+CFLAGS		+= -Werror
+endif
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) -o $(NAME) $(OBJS)
 
 clean:
-		$(RM) $(OBJ)
+	$(RM) $(OBJS)
 
-fclean:		clean
-		$(RM) $(NAME)
+fclean:	clean
+	$(RM) $(NAME)
 
-re:		fclean all
+re:	fclean all
+
+.PHONY: all clean fclean re
