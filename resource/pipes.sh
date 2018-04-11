@@ -5,7 +5,7 @@
 ## pipe to redirect input and output from/to Vrep
 ##
 
-STUDENT_NAME="./ia"
+STUDENT_NAME="./ai"
 BUFF_NAME="./n4s_buffer"
 N4S_NAME="./n4s"
 
