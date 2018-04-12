@@ -16,45 +16,48 @@ static int	my_wordlen(char const *str)
 	int	word = 0;
 
 	while (str[count] != '\0') {
-		if (str[count] == ' ' && str[count + 1] > ' ')
+		if (str[count] == ' ' ||
+		    str[count] == '\t')
 			word = word + 1;
 		count = count + 1;
 	}
-	return (word);
+	return (word + 1);
 }
 
-static char	*write_in_arr(char **tab, char **str, int count)
+static char	*write_in_arr(char **tab, char *str, int count, int *letter)
 {
-	int	index = 0;
-	int	index2 = 0;
+	int	index = *letter;
+	int	index3 = 0;
 
-	while (str[0][index] != '\0')
+	while (str[index] != ' ' && str[index] != '\0')
 		index++;
-	tab[count] = malloc(sizeof(char) * (index + 1));
+	tab[count] = malloc(sizeof(char) * ((index - *letter) + 1));
 	if (tab[count] == NULL)
 		return (MALLOC_ERROR);
-	while (str[0][index2] == ' ' || str[0][index2] == '\t')
-		index2 += 1;
-	while (index2 != index) {
-		tab[count][index2] = str[0][index2];
-		index2 = index2 + 1;
+	while (*letter < index) {
+		tab[count][index3] = str[*letter];
+		*letter += 1;
+		index3 += 1;
 	}
-	tab[count][index2] = '\0';
+	*letter += 1;
+	tab[count][index3] = '\0';
 	return (*tab);
 }
 
 char	**do_double_arr(char *str)
 {
+	int	letter = 0;
 	int	count = 0;
 	int	word = 0;
 	char	**tab;
 
 	word = my_wordlen(str);
-	tab = malloc(sizeof(char *) * (word + 2));
+	tab = malloc(sizeof(char *) * (word + 1));
 	if (tab == NULL)
 		return (MALLOC_ERROR);
-	while (count <= word) {
-		if (write_in_arr(tab, &str, count) == MALLOC_ERROR)
+	tab[0] = NULL;
+	while (count < word) {
+		if (write_in_arr(tab, str, count, &letter) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
 		count = count + 1;
 	}
