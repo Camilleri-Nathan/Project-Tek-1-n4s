@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2018
 ** n4s
 ** File description:
-** main
+** ia.c
 */
 
 int	main(int ac, char **av)

@@ -18,9 +18,10 @@ MAKE		=	make -C
 CFLAGS		=	-W -Wall -Wextra
 CFLAGS		+=	-I./include/
 
-NAME		=	ai
+NAME		=	./resources/ai
 
-SRCS		=	main.c
+SRCS		=	tools/my_putstr.c \
+			main.c
 
 DEBUG		=	no
 
