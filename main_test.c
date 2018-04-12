@@ -22,11 +22,12 @@ int	check_end(char **stock)
 	index--;
 	while (stock[index][count] != '\0') {
 		if (stock[index][count] == '-' &&
-		stock[index][count + 1] == '1')
-			return (0);
+		    stock[index][count + 1] == '1') {
+			return (84);
+		}
 		count++;
 	}
-	return (84);
+	return (0);
 }
 
 int	check_err_parcing(void)
@@ -59,15 +60,15 @@ int main(int ac, char **av)
 
 	write(1, "START_SIMULATION\n", 17);
 	quit = check_err_parcing();
-	if (quit != 0)
-		return (quit);
-	if (check_err_parcing())
+	if (quit == 1)
+		return (0);
+	else if (quit == 84)
 		return (84);
 	write(1, "ST0P_SIMULATION\n", 16);
-	if (quit != 0)
-		return (quit);
-	if (check_err_parcing())
+	if (quit == 1)
+		return (0);
+	else if (quit == 84)
 		return (84);
 	while (1);
-	return (0);
+	return (20);
 }
