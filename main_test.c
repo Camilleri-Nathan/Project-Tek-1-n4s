@@ -8,9 +8,35 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <string.h>
 #include "get_next_line.h"
 #include "get_info.h"
+
+char	**tab_err(void)
+{
+	char **tab_error = NULL;
+	int fd = 0;
+	int index = 0;
+
+	fd = open("./mess_err.txt", O_RDONLY);
+	if (fd == -1)
+		return (NULL);
+	tab_error = malloc(sizeof(char *) * 26);
+	if (tab_error == NULL)
+		return (NULL);
+	while (index < 25) {
+		tab_error[index] = get_next_line(fd);
+		if (tab_error == NULL)
+			return (NULL);
+		index++;
+	}
+	tab_error[index] = NULL;
+	close(fd);
+	return (tab_error);
+}
 
 int	check_end(char **stock)
 {
@@ -70,5 +96,5 @@ int main(int ac, char **av)
 	else if (quit == 84)
 		return (84);
 	while (1);
-	return (20);
+	return (0);
 }
