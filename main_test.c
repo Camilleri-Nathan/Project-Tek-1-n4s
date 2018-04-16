@@ -14,6 +14,7 @@
 #include <string.h>
 #include "get_next_line.h"
 #include "get_info.h"
+#include "my.h"
 
 char	**tab_err(void)
 {
@@ -38,6 +39,21 @@ char	**tab_err(void)
 	return (tab_error);
 }
 
+int	check_wrong_mess(char **stock)
+{
+	char **tab_error = tab_err();
+	int index = 0;
+
+	while (strcmp(tab_error[index], stock[2])) {
+		index++;
+	}
+	if (index == 25)
+		return (84);
+	if (strcmp(stock[0], my_int_to_str(index)) == 0)
+		return (0);
+	return (84);
+}
+
 int	check_end(char **stock)
 {
 	int index = 0;
@@ -56,17 +72,16 @@ int	check_end(char **stock)
 	return (0);
 }
 
-int	check_err_parcing(void)
+int	check_err_parcing(char ***stock)
 {
-	char **stock = NULL;
-
-	stock = do_double_arr(get_next_line(0));
-	if (stock == NULL)
+	*stock = do_double_arr(get_next_line(0));
+	if (*stock == NULL)
 		return (84);
-	if (check_end(stock))
+	if (check_wrong_mess(*stock) == 84) {
+		return (84);
+	}
+	if (check_end(*stock))
 		return (1);
-	if (atoi(stock[0]) != 1)
-		return (84);
 	return (0);
 }
 
@@ -83,16 +98,18 @@ int	parcing_captor(info_t *info, char **stock)
 int main(int ac, char **av)
 {
 	int quit= 0;
+	char **stock = NULL;
 
 	write(1, "START_SIMULATION\n", 17);
-	quit = check_err_parcing();
-	if (quit == 1)
-		return (0);
-	else if (quit == 84)
+	quit = check_err_parcing(&stock);
+	if (atoi(stock[0]) != 1)
+		return (84);
+	if (quit == 84)
 		return (84);
 	write(1, "ST0P_SIMULATION\n", 16);
-	if (quit == 1)
+	if (quit == 1) {
 		return (0);
+	}
 	else if (quit == 84)
 		return (84);
 	while (1);

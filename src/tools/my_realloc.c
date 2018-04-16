@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 #include "my.h"
 
 char	*my_realloc(char *str, int size)
@@ -15,7 +16,7 @@ char	*my_realloc(char *str, int size)
 	int	str_len;
 	int	index = 0;
 
-	str_len = my_strlen(str);
+	str_len = strlen(str);
 	str = malloc(sizeof(char) * size + 1);
 	while (index < str_len) {
 		str[index] = tmp[index];

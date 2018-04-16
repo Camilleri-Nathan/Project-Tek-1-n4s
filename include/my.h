@@ -11,4 +11,8 @@
 #define ERROR 84
 #define SUCCES 0
 
+char	*my_int_to_str(int nb);
+char	*my_realloc(char *str, int size);
+char	*my_revstr(char *str);
+
 #endif /* MY_H_ */

@@ -6,10 +6,13 @@
 */
 
 #include <unistd.h>
+#include <string.h>
+#include <stdio.h>
 
-void	my_putchar(char c);
-int	my_strlen(char const *);
-int	my_putstr(char const *);
+void	my_putchar(char c)
+{
+	write(1, &c, 1);
+}
 
 char	*my_revstr(char *str)
 {
@@ -17,7 +20,7 @@ char	*my_revstr(char *str)
 	char	change_letter = 0;
 	int	letter = 0;
 
-	count = my_strlen(str) - 1;
+	count = strlen(str) - 1;
 	while (letter <=  (count)) {
 		change_letter = str[letter];
 		str[letter] = str[count];
@@ -25,6 +28,6 @@ char	*my_revstr(char *str)
 		letter = letter + 1;
 		count = count - 1;
 	}
-	my_putstr(str);
+	printf("%s\n", str);
 	return (str);
 }
