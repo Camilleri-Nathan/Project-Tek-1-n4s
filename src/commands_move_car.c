@@ -5,11 +5,16 @@
 ** Need4Stek
 */
 
-int	car_forward(float speed)
+#include "my.h"
+#include <stdio.h>
+
+/*int	car_forward(float speed)
 {
 	printf("CAR_FORWARD:%f\n", speed);
+	fprintf(stderr, "CAR_FORWARD:%f\n", speed);
 	return (SUCCES);
-}
+}*/
+
 
 int	car_backwards(float speed)
 {
@@ -19,6 +24,6 @@ int	car_backwards(float speed)
 
 int	wheels_dir(float angle)
 {
-	printf("WHEELS_DIR:%f\n", speed);
+	printf("WHEELS_DIR:%f\n", angle);
 	return (SUCCES);
 }

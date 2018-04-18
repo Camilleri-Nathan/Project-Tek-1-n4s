@@ -5,6 +5,8 @@
 ** Need4Stek
 */
 
+#include <stdio.h>
+
 void	start_simulation(void)
 {
 	printf("START_SIMULATION\n");

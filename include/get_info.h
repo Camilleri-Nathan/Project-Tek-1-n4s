@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** m4s
+** n4s
 ** File description:
 ** get info
 */
@@ -13,10 +13,13 @@ typedef struct info_s
 	float n_left;
 	float left;
 	float middle;
-	float n_right;
 	float right;
+	float n_right;
 }info_t;
 
 char	**do_double_arr(char *str);
+int	check_err_parcing(char ***stock);
+int	parcing_captor(info_t *info, char **stock);
+int     ia(int *end);
 
 #endif /* GET_INFO_H_ */

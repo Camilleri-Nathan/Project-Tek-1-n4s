@@ -9,11 +9,6 @@
 #include <string.h>
 #include <stdio.h>
 
-void	my_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
 char	*my_revstr(char *str)
 {
 	int	count = 0;

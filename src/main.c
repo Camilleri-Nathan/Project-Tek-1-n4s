@@ -74,7 +74,10 @@ int	check_end(char **stock)
 
 int	check_err_parcing(char ***stock)
 {
-	*stock = do_double_arr(get_next_line(0));
+	char *line = get_next_line(0);
+
+	fprintf(stderr, "line: %s\n", line);
+	*stock = do_double_arr(line);
 	if (*stock == NULL)
 		return (84);
 	if (check_wrong_mess(*stock) == 84) {
@@ -95,10 +98,11 @@ int	parcing_captor(info_t *info, char **stock)
 	return (0);
 }
 
-int main(int ac, char **av)
+int	main(void)
 {
-	int quit= 0;
-	char **stock = NULL;
+	int	quit= 0;
+	char	**stock = NULL;
+	int	end = 0;
 
 	write(1, "START_SIMULATION\n", 17);
 	quit = check_err_parcing(&stock);
@@ -106,12 +110,17 @@ int main(int ac, char **av)
 		return (84);
 	if (quit == 84)
 		return (84);
+	fprintf(stderr, "%d end %s stock\n", end, stock[0]);
+	while (end == 0) {
+		ia(&end);
+		fprintf(stderr, "end: %d\n", end);
+	}
+	fprintf(stderr, "end_2: %d\n", end);
 	write(1, "ST0P_SIMULATION\n", 16);
 	if (quit == 1) {
 		return (0);
 	}
 	else if (quit == 84)
 		return (84);
-	while (1);
 	return (0);
 }
