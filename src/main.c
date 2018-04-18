@@ -115,7 +115,7 @@ int	main(void)
 	}
 	write(1, "CAR_FORWARD:0\n", 14);
 	check_err_parcing(&stock);
-	write(1, "ST0P_SIMULATION\n", 16);
+	write(1, "STOP_SIMULATION\n", 16);
 	quit = check_err_parcing(&stock);
 	if (quit == 1) {
 		return (0);
