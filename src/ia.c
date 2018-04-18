@@ -14,8 +14,9 @@
 
 void	car_speed(float middle)
 {
+	fprintf(stderr, "stock = %f\n", middle);
 	if (middle >= 2000)
-		write(1, "CAR_FORWARD:1\n", 14); 
+		write(1, "CAR_FORWARD:1\n", 14);
 	else if (middle >= 1500)
 		write(1, "CAR_FORWARD:0.8\n", 16);
 	else if (middle >= 1000)
@@ -37,34 +38,25 @@ void	init_info(info_t *info)
 	info->middle = 0;
 }
 
-int	ia(int *end)
+int	ia(int *end, char **stock)
 {
 	int	ret = 0;
-	char	**stock = NULL;
 	info_t info;
 
 	init_info(&info);
-	if (info.middle == 0) {
-		get_info_lidar();
-		fprintf(stderr, "Info lidar ok\n");
-   		ret = check_err_parcing(&stock);
-		fprintf(stderr, "Read ok\n");
-		parcing_captor(&info, stock);
-  		fprintf(stderr, "Parse ok\n");
-		if (ret == 84) {
-			*end = 1;
-			return (0);
-		}
-		fprintf(stderr, "ret_1: %d\n", ret);
-		if (ret == 1) {
-			*end = 1;
-			return (0);
-		}
-		fprintf(stderr, "ret_2: %d\n", ret);
-		car_speed(info.middle);
-		fprintf(stderr, "ret_3: %d\n", ret);
+	get_info_lidar();
+	ret = check_err_parcing(&stock);
+	parcing_captor(&info, stock);
+	if (ret == 84) {
+		*end = 1;
+		return (0);
 	}
-	fprintf(stderr, "ret_4: %d\n", ret);
+	if (ret == 1) {
+		*end = 1;
+		return (0);
+	}
+	car_speed(info.middle);
+	ret = check_err_parcing(&stock);
 	return (0);
 }
 

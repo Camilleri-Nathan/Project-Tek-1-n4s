@@ -20,6 +20,6 @@ typedef struct info_s
 char	**do_double_arr(char *str);
 int	check_err_parcing(char ***stock);
 int	parcing_captor(info_t *info, char **stock);
-int     ia(int *end);
+int     ia(int *end, char **stock);
 
 #endif /* GET_INFO_H_ */

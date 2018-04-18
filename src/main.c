@@ -76,8 +76,8 @@ int	check_err_parcing(char ***stock)
 {
 	char *line = get_next_line(0);
 
-	fprintf(stderr, "line: %s\n", line);
 	*stock = do_double_arr(line);
+	fprintf(stderr, "line: %s\n", line);
 	if (*stock == NULL)
 		return (84);
 	if (check_wrong_mess(*stock) == 84) {
@@ -110,13 +110,13 @@ int	main(void)
 		return (84);
 	if (quit == 84)
 		return (84);
-	fprintf(stderr, "%d end %s stock\n", end, stock[0]);
 	while (end == 0) {
-		ia(&end);
-		fprintf(stderr, "end: %d\n", end);
+		ia(&end, stock);
 	}
-	fprintf(stderr, "end_2: %d\n", end);
+	write(1, "CAR_FORWARD:0\n", 14);
+	check_err_parcing(&stock);
 	write(1, "ST0P_SIMULATION\n", 16);
+	quit = check_err_parcing(&stock);
 	if (quit == 1) {
 		return (0);
 	}
