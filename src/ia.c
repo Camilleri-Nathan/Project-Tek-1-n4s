@@ -11,22 +11,29 @@
 #include "get_info.h"
 #include "commands.h"
 
+void 	right_and_left_dir(info_t *info)
+{
+	if (((info->n_left - info->n_right) < 50) || ((info->left - info->right) < 50))
+		write(1, "WHEELS_DIR:0.3\n", 15);
+	else if(((info->n_left - info->n_right) < -50) || ((info->left - info->right) < -50))
+		write(1, "WHEELS_DIR:-0.3\n", 16);
+	else
+		write(1, "WHEELS_DIR:0\n", 13);
+}
 
 void	car_speed(float middle)
 {
-	fprintf(stderr, "stock = %f\n", middle);
-	if (middle >= 2000)
+	fprintf(stderr, "\nstock = %f\n\n", middle);
+	if (middle >= 10000)
 		write(1, "CAR_FORWARD:1\n", 14);
-	else if (middle >= 1500)
-		write(1, "CAR_FORWARD:0.8\n", 16);
+	else if (middle >= 5000)
+		write(1, "CAR_FORWARD:0.7\n", 16);
 	else if (middle >= 1000)
-		write(1, "CAR_FORWARD:0.5\n", 16);
+		write(1, "CAR_FORWARD:0.4\n", 16);
 	else if (middle >= 500)
 		write(1, "CAR_FORWARD:0.3\n", 16);
-	else if (middle < 500)
-		write(1, "CAR_FORWARD:0.15\n", 17);
 	else
-		write(1, "CAR_FORWARD:0\n", 14);
+		write(1, "CAR_FORWARD:0,15\n", 17);
 }
 
 void	init_info(info_t *info)
@@ -41,7 +48,7 @@ void	init_info(info_t *info)
 int	ia(int *end, char **stock)
 {
 	int	ret = 0;
-	info_t info;
+	info_t	info;
 
 	init_info(&info);
 	get_info_lidar();
@@ -56,15 +63,12 @@ int	ia(int *end, char **stock)
 		return (0);
 	}
 	car_speed(info.middle);
+	if (info.middle < 95)
+                        write(1, "CAR_FORWARD:0\n", 14);
 	ret = check_err_parcing(&stock);
+	right_and_left_dir(&info);
+	ret = check_err_parcing(&stock);
+	sleep(2);
 	return (0);
 }
 
-/*void 	right_and_left_cdir()
-{
-       	if (n_left > n_right)
-		wheels_dir(0.2);
-	else if (n_left < n_right)
-		wheels_dir(-0.2);
-	else if (left <= 50)
-}*/

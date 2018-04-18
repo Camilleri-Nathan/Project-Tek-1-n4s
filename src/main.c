@@ -88,14 +88,13 @@ int	check_err_parcing(char ***stock)
 	return (0);
 }
 
-int	parcing_captor(info_t *info, char **stock)
+void	parcing_captor(info_t *info, char **stock)
 {
 	info->n_left = (atof(stock[4]) + atof(stock[5])) / 2;
 	info->left = (atof(stock[12]) + atof(stock[13])) / 2;
 	info->middle = (atof(stock[19]) + atof(stock[20])) / 2;
 	info->n_right = (atof(stock[25]) + atof(stock[26])) / 2;
 	info->right = (atof(stock[32]) + atof(stock[33])) / 2;
-	return (0);
 }
 
 int	main(void)
@@ -113,7 +112,7 @@ int	main(void)
 	while (end == 0) {
 		ia(&end, stock);
 	}
-	write(1, "CAR_FORWARD:0\n", 14);
+	write(1, "CAR_FORWARD:0,15\n", 17);
 	check_err_parcing(&stock);
 	write(1, "STOP_SIMULATION\n", 16);
 	quit = check_err_parcing(&stock);
