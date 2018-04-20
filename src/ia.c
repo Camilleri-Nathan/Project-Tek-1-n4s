@@ -13,19 +13,42 @@
 
 void 	right_and_left_dir(info_t *info)
 {
-	float	length = info->n_left - info->n_right;
+	float	middle = info->middle;
 	
-	fprintf(stderr, "\nlength = %f\n\n", length);	
-        if (info->n_left >= info->n_right)
-		write(1, "WHEELS_DIR:0.15\n", 16);
-	else if(info->n_left < info->n_right)
-		write(1, "WHEELS_DIR:-0.15\n", 17);
+	if (info->n_left >= info->n_right) {
+		if (middle > 2500)
+			write(1, "WHEELS_DIR:0.02\n", 16);
+		else if (middle > 1500)
+			write(1, "WHEELS_DIR:0.05\n", 16);
+		else if (middle > 1000)
+			write(1, "WHEELS_DIR:0.15\n", 16);
+		else if (middle > 500)
+			write(1, "WHEELS_DIR:0.2\n", 15);
+		else if (middle > 250)
+			write(1, "WHEELS_DIR:0.3\n", 15);
+		else if (middle > 100)
+			write(1, "WHEELS_DIR:0.5\n", 15);
+		
+	} else {
+		if (middle > 2500)
+			write(1, "WHEELS_DIR:-0.02\n", 17);
+		else if (middle > 1500)
+			write(1, "WHEELS_DIR:-0.05\n", 17);
+		else if (middle > 1000)
+			write(1, "WHEELS_DIR:-0.15\n", 17);
+		else if (middle > 500)
+			write(1, "WHEELS_DIR:-0.2\n", 16);
+		else if (middle > 250)
+			write(1, "WHEELS_DIR:-0.3\n", 16);
+		else if (middle > 100)
+			write(1, "WHEELS_DIR:-0.5\n", 16);
+	}
 }
 
 void	car_speed(float middle)
 {
 	if (middle >= 150)
-		write(1, "CAR_FORWARD:0.4\n", 16);
+		write(1, "CAR_FORWARD:0.3\n", 16);
 }
 
 void	init_info(info_t *info)
@@ -55,11 +78,12 @@ int	ia(int *end, char **stock)
 		return (0);
 	} else {
 		car_speed(info.middle);
-		if (info.middle < 150)
+		if (info.middle < 95)
 			write(1, "CAR_FORWARD:0\n", 14);
 		ret = check_err_parcing(&stock);
 		right_and_left_dir(&info);
 		ret = check_err_parcing(&stock);
+		fprintf(stderr, "\ndirection\n\n");
 	}
 	return (0);
 }
