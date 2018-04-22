@@ -15,7 +15,7 @@ char	*my_realloc(char *str, int size)
 	char	*tmp = str;
 	int	str_len = strlen(str);
 	int	index = 0;
-	
+
 	str = malloc(sizeof(char) * size + 1);
 	while (index < str_len) {
 		str[index] = tmp[index];

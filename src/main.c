@@ -64,7 +64,7 @@ int	check_end(char **stock)
 	index--;
 	while (stock[index][count] != '\0') {
 		if (stock[index][count] == '-' &&
-		    stock[index][count + 1] == '1') {
+		stock[index][count + 1] == '1') {
 			return (84);
 		}
 		count++;

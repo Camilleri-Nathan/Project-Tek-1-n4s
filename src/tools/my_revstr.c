@@ -11,12 +11,11 @@
 
 char	*my_revstr(char *str)
 {
-	int	count = 0;
+	int	count = strlen(str) - 1;
 	char	change_letter = 0;
 	int	letter = 0;
 
-	count = strlen(str) - 1;
-	while (letter <=  (count)) {
+	while (letter <= (count)) {
 		change_letter = str[letter];
 		str[letter] = str[count];
 		str[count] = change_letter;
