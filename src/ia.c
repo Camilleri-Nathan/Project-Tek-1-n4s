@@ -98,7 +98,6 @@ int	ia(int *end, char **stock)
 		ret = check_err_parcing(&stock);
 		right_and_left_dir(&info);
 		ret = check_err_parcing(&stock);
-		fprintf(stderr, "\ndirection\n\n");
 	}
 	return (0);
 }

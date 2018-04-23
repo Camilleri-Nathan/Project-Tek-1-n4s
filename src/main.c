@@ -90,9 +90,9 @@ int	check_err_parcing(char ***stock)
 
 int	main(void)
 {
-	int	quit= 0;
 	char	**stock = NULL;
 	int	end = 0;
+	int	quit = 0;
 
 	write(1, "START_SIMULATION\n", 17);
 	quit = check_err_parcing(&stock);
@@ -100,16 +100,13 @@ int	main(void)
 		return (84);
 	if (quit == 84)
 		return (84);
-	while (end == 0) {
+	while (end == 0)
 		ia(&end, stock);
-	}
-	write(1, "CAR_FORWARD:0,15\n", 17);
 	check_err_parcing(&stock);
 	write(1, "STOP_SIMULATION\n", 16);
 	quit = check_err_parcing(&stock);
-	if (quit == 1) {
+	if (quit == 1)
 		return (0);
-	}
 	else if (quit == 84)
 		return (84);
 	return (0);
