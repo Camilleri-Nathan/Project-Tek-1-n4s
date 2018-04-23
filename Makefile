@@ -26,6 +26,7 @@ SRCS		=	tools/my_put_nbr.c		\
 			tools/my_realloc.c		\
 			tools/my_revstr.c		\
 			tools/my_str_to_word_array.c	\
+			parcing_captor.c	\
 			commands_info_car.c		\
 			commands_info_time_and_cycle.c	\
 			commands_move_car.c		\
