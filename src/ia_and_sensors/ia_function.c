@@ -25,7 +25,7 @@ void 	right_and_left_dir(info_t *info)
 		else if (middle > 1000)
 			write(1, "WHEELS_DIR:0.10\n", 16);
 		else if (middle > 500)
-			write(1, "WHEELS_DIR:0.2\n", 15);
+			write(1, "WHEELS_DIR:0.15\n", 16);
 		else if (middle > 350)
 			write(1, "WHEELS_DIR:0.3\n", 15);
 		else if (middle > 100)
@@ -40,7 +40,7 @@ void 	right_and_left_dir(info_t *info)
 		else if (middle > 1000)
 			write(1, "WHEELS_DIR:-0.10\n", 17);
 		else if (middle > 500)
-			write(1, "WHEELS_DIR:-0.2\n", 16);
+			write(1, "WHEELS_DIR:-0.15\n", 17);
 		else if (middle > 350)
 			write(1, "WHEELS_DIR:-0.3\n", 16);
 		else if (middle > 100)
@@ -51,9 +51,9 @@ void 	right_and_left_dir(info_t *info)
 void	car_speed(float middle)
 {
 	if (middle >= 2000)
-		write(1, "CAR_FORWARD:0.9\n", 16);
+		write(1, "CAR_FORWARD:1\n", 14);
 	else if (middle >= 1500)
-		write(1, "CAR_FORWARD:0.6\n", 16);
+		write(1, "CAR_FORWARD:0.75\n", 17);
 	else if (middle >= 1000)
 		write(1, "CAR_FORWARD:0.5\n", 16);
 	else if (middle >= 600)
@@ -62,8 +62,10 @@ void	car_speed(float middle)
 		write(1, "CAR_FORWARD:0.3\n", 16);
 	else if (middle >= 200)
 		write(1, "CAR_FORWARD:0.2\n", 16);
-	else
-		write(1, "CAR_FORWARD:0.1\n", 16);
+	else if (middle >=95)
+		write(1, "CAR_FORWARD:0.05\n", 17);
+	else if (middle < 95)
+		write(1, "CAR_FORWARD:0\n", 14);
 }
 
 void	init_info(info_t *info)
@@ -93,8 +95,6 @@ int	ia(int *end, char **stock)
 		return (0);
 	} else {
 		car_speed(info.middle);
-		if (info.middle < 95)
-			write(1, "CAR_FORWARD:0\n", 14);
 		ret = check_err_parcing(&stock);
 		right_and_left_dir(&info);
 		ret = check_err_parcing(&stock);
