@@ -83,7 +83,7 @@ int	ia(int *end, char **stock)
 	info_t	info;
 
 	init_info(&info);
-	get_info_lidar();
+	write(1, "GET_INFO_LIDAR\n", 15);
 	ret = check_err_parcing(&stock);
 	parcing_captor(&info, stock);
 	if (ret == 84) {

@@ -22,7 +22,7 @@ char	**tab_err(void)
 	int fd = 0;
 	int index = 0;
 
-	fd = open("./src/asset/mess_err.txt", O_RDONLY);
+	fd = open("./mess_err.txt", O_RDONLY);
 	if (fd == -1)
 		return (NULL);
 	tab_error = malloc(sizeof(char *) * 26);
