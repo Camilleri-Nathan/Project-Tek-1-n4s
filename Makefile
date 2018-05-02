@@ -20,17 +20,15 @@ CFLAGS		+=	-I./include/
 
 NAME		=	ia
 
-SRCS		=	tools/my_put_nbr.c			\
-			tools/get_next_line.c			\
-			tools/my_int_to_str.c			\
-			tools/my_realloc.c				\
-			tools/my_revstr.c				\
-			tools/my_str_to_word_array.c	\
-			ia_function.c					\
-			parcing_captor.c				\
-			commands_info_car.c				\
-			commands_move_car.c				\
-			main.c
+SRCS		=	tools/my_put_nbr.c				\
+				tools/get_next_line.c			\
+				tools/my_int_to_str.c			\
+				tools/my_realloc.c				\
+				tools/my_revstr.c				\
+				tools/my_str_to_word_array.c	\
+				ia_function.c					\
+				parcing_captor.c				\
+				main.c
 
 DEBUG		=	no
 
