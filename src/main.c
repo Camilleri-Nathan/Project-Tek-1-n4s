@@ -62,7 +62,6 @@ int	check_end(char **stock)
 	while (stock[index])
 		index++;
 	index -= 2;
-	fprintf(stderr, "stock = %s\n", stock[index]);
 	if (strcmp(stock[index], "Track Cleared") == 0)
 		return (84);
 	index = 0;
@@ -84,8 +83,9 @@ int	check_err_parcing(char ***stock)
 	char *line = get_next_line(0);
 
 	*stock = do_double_arr(line);
-	if (*stock == NULL)
+	if (*stock == NULL) {
 		return (84);
+	}
 	if (check_wrong_mess(*stock) == 84) {
 		return (84);
 	}
@@ -104,8 +104,9 @@ int	main(void)
 	quit = check_err_parcing(&stock);
 	if (atoi(stock[0]) != 1)
 		return (84);
-	if (quit == 84)
+	if (quit == 84) {
 		return (84);
+	}
 	while (end == 0) {
 		ia(&end, stock);
 	}

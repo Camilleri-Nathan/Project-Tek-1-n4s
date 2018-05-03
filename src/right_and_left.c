@@ -11,7 +11,7 @@ void	left_dir(float middle)
 {
 	if (middle > 2000)
 		write(1, "WHEELS_DIR:-0.02\n", 17);
-	else if (middle > 1800)
+	else if (middle > 1850)
 		write(1, "WHEELS_DIR:-0.05\n", 17);
 	else if (middle > 1500)
 		write(1, "WHEELS_DIR:-0.08\n", 17);
@@ -31,12 +31,12 @@ void	right_dir(float middle)
 {
 	if (middle > 2000)
 		write(1, "WHEELS_DIR:0.02\n", 16);
-	else if (middle > 1800)
+	else if (middle > 1850)
 		write(1, "WHEELS_DIR:0.05\n", 16);
 	else if (middle > 1500)
 		write(1, "WHEELS_DIR:0.08\n", 16);
 	else if (middle > 1000)
-			write(1, "WHEELS_DIR:0.10\n", 16);
+		write(1, "WHEELS_DIR:0.10\n", 16);
 	else if (middle > 500)
 		write(1, "WHEELS_DIR:0.15\n", 16);
 	else if (middle > 350)
