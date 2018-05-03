@@ -16,20 +16,7 @@ void 	right_and_left_dir(info_t *info)
 	float	middle = info->middle;
 
 	if (info->n_left >= info->n_right) {
-		if (middle > 2500)
-			write(1, "WHEELS_DIR:0.02\n", 16);
-		else if (middle > 2000)
-			write(1, "WHEELS_DIR:0.05\n", 16);
-		else if (middle > 1500)
-			write(1, "WHEELS_DIR:0.08\n", 16);
-		else if (middle > 1000)
-			write(1, "WHEELS_DIR:0.10\n", 16);
-		else if (middle > 500)
-			write(1, "WHEELS_DIR:0.15\n", 16);
-		else if (middle > 350)
-			write(1, "WHEELS_DIR:0.3\n", 15);
-		else if (middle > 100)
-			write(1, "WHEELS_DIR:0.4\n", 15);
+		right_dir(middle);
 	} else {
 		left_dir(middle);
 	}
@@ -39,6 +26,8 @@ void	car_speed(float middle)
 {
 	if (middle >= 2000)
 		write(1, "CAR_FORWARD:1\n", 14);
+	else if (middle >= 1850)
+		write(1, "CAR_FORWARD:0.8\n", 16);
 	else if (middle >= 1500)
 		write(1, "CAR_FORWARD:0.75\n", 17);
 	else if (middle >= 1000)
@@ -78,6 +67,7 @@ int	ia(int *end, char **stock)
 		return (0);
 	}
 	else if (ret == 1) {
+		write(1, "STOP_SIMULATION\n", 16);
 		*end = 1;
 		return (0);
 	} else {

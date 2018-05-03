@@ -62,6 +62,7 @@ int	check_end(char **stock)
 	while (stock[index])
 		index++;
 	index -= 2;
+	fprintf(stderr, "stock = %s\n", stock[index]);
 	if (strcmp(stock[index], "Track Cleared") == 0)
 		return (84);
 	index = 0;
