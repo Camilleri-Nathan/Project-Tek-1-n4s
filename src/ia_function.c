@@ -31,20 +31,7 @@ void 	right_and_left_dir(info_t *info)
 		else if (middle > 100)
 			write(1, "WHEELS_DIR:0.4\n", 15);
 	} else {
-		if (middle > 2500)
-			write(1, "WHEELS_DIR:-0.02\n", 17);
-		else if (middle > 2000)
-			write(1, "WHEELS_DIR:-0.05\n", 17);
-		else if (middle > 1500)
-			write(1, "WHEELS_DIR:-0.08\n", 17);
-		else if (middle > 1000)
-			write(1, "WHEELS_DIR:-0.10\n", 17);
-		else if (middle > 500)
-			write(1, "WHEELS_DIR:-0.15\n", 17);
-		else if (middle > 350)
-			write(1, "WHEELS_DIR:-0.3\n", 16);
-		else if (middle > 100)
-			write(1, "WHEELS_DIR:-0.4\n", 16);
+		left_dir(middle);
 	}
 }
 

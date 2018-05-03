@@ -17,4 +17,8 @@ int	wheels_dir(float angle);
 /* commands_info_car */
 void	get_info_lidar(void);
 
+
+void	left_dir(float middle);
+void	right_dir(float middle);
+
 #endif /* COMMANDS_H */
