@@ -73,8 +73,18 @@ int	ia(int *end, char **stock)
 	} else {
 		car_speed(info.middle);
 		ret = check_err_parcing(&stock);
+		if (ret == 1) {
+			write(1, "STOP_SIMULATION\n", 16);
+			*end = 1;
+			return (0);
+		}
 		right_and_left_dir(&info);
 		ret = check_err_parcing(&stock);
+		if (ret == 1) {
+			write(1, "STOP_SIMULATION\n", 16);
+			*end = 1;
+			return (0);
+		}
 	}
 	return (0);
 }
