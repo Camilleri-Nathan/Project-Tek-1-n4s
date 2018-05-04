@@ -26,8 +26,8 @@ void	car_speed(float middle)
 {
 	if (middle >= 2000)
 		write(1, "CAR_FORWARD:1\n", 14);
-	else if (middle >= 1850)
-		write(1, "CAR_FORWARD:0.8\n", 16);
+	else if (middle >= 1800)
+		write(1, "CAR_FORWARD:0.9\n", 16);
 	else if (middle >= 1500)
 		write(1, "CAR_FORWARD:0.75\n", 17);
 	else if (middle >= 1000)

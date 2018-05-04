@@ -110,11 +110,5 @@ int	main(void)
 	while (end == 0) {
 		ia(&end, stock);
 	}
-/*	write(1, "STOP_SIMULATION\n", 16);
-	quit = check_err_parcing(&stock);
-	if (quit == 1)
-		return (0);
-	else if (quit == 84)
-		return (84);
-*/	return (0);
+	return (0);
 }
