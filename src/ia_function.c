@@ -24,10 +24,10 @@ void 	right_and_left_dir(info_t *info)
 
 void	car_speed(float middle)
 {
-	if (middle >= 2000)
+	if (middle >= 1800)
 		write(1, "CAR_FORWARD:1\n", 14);
-	else if (middle >= 1800)
-		write(1, "CAR_FORWARD:0.9\n", 16);
+	else if (middle >= 1700)
+		write(1, "CAR_FORWARD:0.9\n", 17);
 	else if (middle >= 1500)
 		write(1, "CAR_FORWARD:0.75\n", 17);
 	else if (middle >= 1000)
@@ -38,9 +38,11 @@ void	car_speed(float middle)
 		write(1, "CAR_FORWARD:0.3\n", 16);
 	else if (middle >= 200)
 		write(1, "CAR_FORWARD:0.2\n", 16);
-	else if (middle >=95)
+	else if (middle >= 100)
+		write(1, "CAR_FORWARD:0.1\n", 16);
+	else if (middle >= 50)
 		write(1, "CAR_FORWARD:0.05\n", 17);
-	else if (middle < 95)
+	else
 		write(1, "CAR_FORWARD:0\n", 14);
 }
 
@@ -64,7 +66,7 @@ int	ia(int *end, char **stock)
 	parcing_captor(&info, stock);
 	if (ret == 84) {
 		*end = 1;
-		return (0);
+	return (0);
 	}
 	else if (ret == 1) {
 		write(1, "STOP_SIMULATION\n", 16);
