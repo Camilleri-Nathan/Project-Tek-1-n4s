@@ -66,7 +66,7 @@ int	ia(int *end, char **stock)
 	parcing_captor(&info, stock);
 	if (ret == 84) {
 		*end = 1;
-	return (0);
+		return (0);
 	}
 	else if (ret == 1) {
 		write(1, "STOP_SIMULATION\n", 16);
