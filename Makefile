@@ -18,7 +18,7 @@ MAKE		=	make -C
 CFLAGS		=	-W -Wall -Wextra
 CFLAGS		+=	-I./include/
 
-NAME		=	ia
+NAME		=	ai
 
 SRCS		=	tools/my_put_nbr.c				\
 				tools/get_next_line.c			\
