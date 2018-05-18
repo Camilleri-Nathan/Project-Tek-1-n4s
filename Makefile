@@ -28,7 +28,8 @@ SRCS		=	tools/my_put_nbr.c		\
 			tools/my_str_to_word_array.c	\
 			ia_function.c			\
 			parcing_captor.c		\
-			right_and_left.c 		\
+			dir_and_speed.c 		\
+			pars_message.c	 		\
 			main.c
 
 DEBUG		=	no

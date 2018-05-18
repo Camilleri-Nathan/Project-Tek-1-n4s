@@ -11,41 +11,6 @@
 #include "get_info.h"
 #include "commands.h"
 
-void 	right_and_left_dir(info_t *info)
-{
-	float	middle = info->middle;
-
-	if (info->n_left >= info->n_right) {
-		right_dir(middle);
-	} else {
-		left_dir(middle);
-	}
-}
-
-void	car_speed(float middle)
-{
-	if (middle >= 1800)
-		write(1, "CAR_FORWARD:1\n", 14);
-	else if (middle >= 1700)
-		write(1, "CAR_FORWARD:0.9\n", 17);
-	else if (middle >= 1500)
-		write(1, "CAR_FORWARD:0.75\n", 17);
-	else if (middle >= 1000)
-		write(1, "CAR_FORWARD:0.5\n", 16);
-	else if (middle >= 600)
-		write(1, "CAR_FORWARD:0.4\n", 16);
-	else if (middle >= 400)
-		write(1, "CAR_FORWARD:0.3\n", 16);
-	else if (middle >= 200)
-		write(1, "CAR_FORWARD:0.2\n", 16);
-	else if (middle >= 100)
-		write(1, "CAR_FORWARD:0.1\n", 16);
-	else if (middle >= 50)
-		write(1, "CAR_FORWARD:0.05\n", 17);
-	else
-		write(1, "CAR_FORWARD:0\n", 14);
-}
-
 void	init_info(info_t *info)
 {
 	info->n_left = 0;
@@ -53,6 +18,31 @@ void	init_info(info_t *info)
 	info->n_right = 0;
 	info->right = 0;
 	info->middle = 0;
+}
+
+int	check_ret(int ret, int *end)
+{
+	if (ret == 1) {
+		write(1, "STOP_SIMULATION\n", 16);
+		*end = 1;
+		return (0);
+	}
+	return (1);
+}
+
+int	car_movment(info_t info, char **stock, int *end)
+{
+	int	ret = 0;
+
+	car_speed(info.middle);
+	ret = check_err_parcing(&stock);
+	if (check_ret(ret, end) == 0)
+		return (0);
+	right_and_left_dir(&info);
+	ret = check_err_parcing(&stock);
+	if (check_ret(ret, end) == 0)
+		return (0);
+	return (1);
 }
 
 int	ia(int *end, char **stock)
@@ -68,25 +58,11 @@ int	ia(int *end, char **stock)
 		*end = 1;
 		return (0);
 	}
-	else if (ret == 1) {
-		write(1, "STOP_SIMULATION\n", 16);
-		*end = 1;
+	if (check_ret(ret, end) == 0)
 		return (0);
-	} else {
-		car_speed(info.middle);
-		ret = check_err_parcing(&stock);
-		if (ret == 1) {
-			write(1, "STOP_SIMULATION\n", 16);
-			*end = 1;
+	else {
+		if (car_movment(info, stock, end) == 0)
 			return (0);
-		}
-		right_and_left_dir(&info);
-		ret = check_err_parcing(&stock);
-		if (ret == 1) {
-			write(1, "STOP_SIMULATION\n", 16);
-			*end = 1;
-			return (0);
-		}
 	}
 	return (0);
 }
