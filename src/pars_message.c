@@ -16,6 +16,17 @@
 #include "get_info.h"
 #include "my.h"
 
+void	free_tab_error(char **tab_error)
+{
+	int	count = 0;
+
+	while (tab_error[count] != NULL) {
+		free(tab_error[count]);
+		count++;
+	}
+	free(tab_error);
+}
+
 char	**tab_err(void)
 {
 	char **tab_error = NULL;
@@ -41,16 +52,32 @@ char	**tab_err(void)
 
 int	check_wrong_mess(char **stock)
 {
-	char **tab_error = tab_err();
-	int index = 0;
+	char	**tab_error = tab_err();
+	int	index = 0;
+	int	arraylen = my_arraylen((char const **)stock);
+	char	*number = NULL;
 
-	while (strcmp(tab_error[index], stock[2])) {
-		index++;
-	}
-	if (index == 25)
+	if (arraylen <= 2)
 		return (84);
-	if (strcmp(stock[0], my_int_to_str(index)) == 0)
+	while (tab_error[index] != NULL) {
+		if (stock[2] && strcmp(tab_error[index], stock[2]) != 0) {
+			index++;
+		}
+		else
+			break;
+	}
+	if (index == 25) {
+		free_tab_error(tab_error);
+		return (84);
+	}
+	number = my_int_to_str(index);
+	if (strcmp(stock[0], number) == 0) {
+		free(number);
+		free_tab_error(tab_error);
 		return (0);
+	}
+	free(number);
+	free_tab_error(tab_error);
 	return (84);
 }
 
@@ -83,13 +110,15 @@ int	check_err_parcing(char ***stock)
 	char *line = get_next_line(0);
 
 	*stock = do_double_arr(line);
+	free(line);
 	if (*stock == NULL) {
-		return (84);
+		exit (84);
 	}
 	if (check_wrong_mess(*stock) == 84) {
 		return (84);
 	}
-	if (check_end(*stock) == 84)
+	if (check_end(*stock) == 84) {
 		return (1);
+	}
 	return (0);
 }

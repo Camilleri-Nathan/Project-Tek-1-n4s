@@ -36,10 +36,14 @@ int	car_movment(info_t info, char **stock, int *end)
 
 	car_speed(info.middle);
 	ret = check_err_parcing(&stock);
+	if (stock != NULL)
+		free_stock(stock);
 	if (check_ret(ret, end) == 0)
 		return (0);
 	right_and_left_dir(&info);
 	ret = check_err_parcing(&stock);
+	if (stock != NULL)
+		free_stock(stock);
 	if (check_ret(ret, end) == 0)
 		return (0);
 	return (1);
@@ -56,13 +60,19 @@ int	ia(int *end, char **stock)
 	parcing_captor(&info, stock);
 	if (ret == 84) {
 		*end = 1;
+		free_stock(stock);
 		return (0);
 	}
-	if (check_ret(ret, end) == 0)
+	if (check_ret(ret, end) == 0) {
+		free_stock(stock);
 		return (0);
-	else {
-		if (car_movment(info, stock, end) == 0)
+	} else {
+		if (car_movment(info, stock, end) == 0) {
+			free_stock(stock);
 			return (0);
+		}
 	}
+	if (stock != NULL)
+		free_stock(stock);
 	return (0);
 }

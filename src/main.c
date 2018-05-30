@@ -16,7 +16,7 @@
 #include "get_info.h"
 #include "my.h"
 
-static void	free_stock(char **stock)
+void	free_stock(char **stock)
 {
 	int	count = 0;
 

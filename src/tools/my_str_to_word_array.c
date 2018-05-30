@@ -49,6 +49,9 @@ char	**do_double_arr(char *str)
 	int	word = 0;
 	char	**tab;
 
+	if (str == NULL) {
+		return (NULL);
+	}
 	word = my_wordlen(str);
 	tab = malloc(sizeof(char *) * (word + 1));
 	if (tab == NULL)

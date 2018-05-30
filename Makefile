@@ -30,6 +30,7 @@ SRCS		=	tools/my_put_nbr.c		\
 			parcing_captor.c		\
 			dir_and_speed.c 		\
 			pars_message.c	 		\
+			tools/my_arraylen.c		\
 			main.c
 
 DEBUG		=	no

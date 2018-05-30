@@ -20,6 +20,8 @@ typedef struct info_s
 char	**do_double_arr(char *str);
 int	check_err_parcing(char ***stock);
 void	parcing_captor(info_t *info, char **stock);
-int     ia(int *end, char **stock);
+int	ia(int *end, char **stock);
+int	my_arraylen(char const **array);
+void	free_stock(char **stock);
 
 #endif /* GET_INFO_H_ */
